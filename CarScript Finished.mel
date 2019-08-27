@@ -140,14 +140,5 @@ rename "|Ground" "Model";
 parent Model Geometry ;
 DeleteHistory;
 CenterPivot;
-polyBevel3 -fraction 0.5 -offsetAsFraction 1 -autoFit 1 -depth 1 -mitering 0 -miterAlong 0 -chamfer 1 -segments 1 -worldSpace 1 -smoothingAngle 30 -subdivideNgons 1 -mergeVertices 1 -mergeVertexTolerance 0.0001 -miteringAngle 180 -angleTolerance 180 -ch 1 pCylinder1.e[20:39];
-// Result: polyBevel1 // 
-polyBevel3 -fraction 0.5 -offsetAsFraction 1 -autoFit 1 -depth 1 -mitering 0 -miterAlong 0 -chamfer 1 -segments 1 -worldSpace 1 -smoothingAngle 30 -subdivideNgons 1 -mergeVertices 1 -mergeVertexTolerance 0.0001 -miteringAngle 180 -angleTolerance 180 -ch 1 pCylinder1.e[0:19];
-// Result: polyBevel3 // 
-hilite pCube1.f[0] ;
-polyBevel3 -fraction 0.5 -offsetAsFraction 1 -autoFit 1 -depth 1 -mitering 0 -miterAlong 0 -chamfer 1 -segments 1 -worldSpace 1 -smoothingAngle 30 -subdivideNgons 1 -mergeVertices 1 -mergeVertexTolerance 0.0001 -miteringAngle 180 -angleTolerance 180 -ch 1 pCube1.e[2];
-// Result: polyBevel5 // 
-polyBevel3 -fraction 0.5 -offsetAsFraction 1 -autoFit 1 -depth 1 -mitering 0 -miterAlong 0 -chamfer 1 -segments 1 -worldSpace 1 -smoothingAngle 30 -subdivideNgons 1 -mergeVertices 1 -mergeVertexTolerance 0.0001 -miteringAngle 180 -angleTolerance 180 -ch 1 pCube1.e[4:5] pCube1.e[9] pCube1.e[11] pCube1.e[17] pCube1.e[19] pCube1.e[26] pCube1.e[30] pCube1.e[36:42] pCube1.e[44:45] pCube1.e[47:48] pCube1.e[50:52];
-// Result: polyBevel7 // 
-hilite pCube1.f[3] pCube1.f[5] ;
+
 select -cl  ;
