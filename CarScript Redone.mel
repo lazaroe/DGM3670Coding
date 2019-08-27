@@ -1,0 +1,197 @@
+polyCylinder -r 1 -h 0.5 -sx 20 -sy 1 -sz 0 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+rotate -r -os -fo 0 0 90 ;
+select -r pCylinder1.f[21] ;
+performBevelOrChamfer;
+polyBevel3 -fraction 0.5 -offsetAsFraction 1 -autoFit 1 -depth 1 -mitering 0 -miterAlong 0 -chamfer 1 -segments 1 -worldSpace 1 -smoothingAngle 30 -subdivideNgons 1 -mergeVertices 1 -mergeVertexTolerance 0.0001 -miteringAngle 180 -angleTolerance 180 -ch 1 pCylinder1.e[20:39];
+setAttr "polyBevel1.segments" 2.7;
+select -r pCylinder1.f[0] ;
+performBevelOrChamfer;
+polyBevel3 -fraction 0.5 -offsetAsFraction 1 -autoFit 1 -depth 1 -mitering 0 -miterAlong 0 -chamfer 1 -segments 1 -worldSpace 1 -smoothingAngle 30 -subdivideNgons 1 -mergeVertices 1 -mergeVertexTolerance 0.0001 -miteringAngle 180 -angleTolerance 180 -ch 1 pCylinder1.e[0:19];
+setAttr "polyBevel3.segments" 2.7;
+select -r pCylinder1.f[70] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0.25 -pvy -1.192092896e-007 -pvz -1.788139343e-007 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder1.f[70];
+scale -r -p 0.25cm -1.19209e-007cm -1.78814e-007cm 0.696124 0.696124 0.696124 ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0.25 -pvy -1.192092897e-007 -pvz -1.788139343e-007 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder1.f[70];
+move -r -0.103729 0 0 ;
+select -r pCylinder1.f[230] ;
+select -tgl pCylinder1.f[229] ;
+select -add pCylinder1.f[215:234] ;
+polySoftEdge -a 180 -ch 1 pCylinder1.f[215:234];
+select -r pCylinder1.f[70] ;
+polySoftEdge -a 0 -ch 1 pCylinder1.f[70];
+select -r pCylinder1.e[434] ;
+select -add pCylinder1.e[404] pCylinder1.e[406] pCylinder1.e[408] pCylinder1.e[410] pCylinder1.e[412] pCylinder1.e[414] pCylinder1.e[416] pCylinder1.e[418] pCylinder1.e[420] pCylinder1.e[422] pCylinder1.e[424] pCylinder1.e[426] pCylinder1.e[428] pCylinder1.e[430] pCylinder1.e[432] pCylinder1.e[434] pCylinder1.e[436] pCylinder1.e[438] pCylinder1.e[440:441] ;
+polySoftEdge -a 0 -ch 1 pCylinder1.e[404] pCylinder1.e[406] pCylinder1.e[408] pCylinder1.e[410] pCylinder1.e[412] pCylinder1.e[414] pCylinder1.e[416] pCylinder1.e[418] pCylinder1.e[420] pCylinder1.e[422] pCylinder1.e[424] pCylinder1.e[426] pCylinder1.e[428] pCylinder1.e[430] pCylinder1.e[432] pCylinder1.e[434] pCylinder1.e[436] pCylinder1.e[438] pCylinder1.e[440:441];
+select -cl  ;
+select -r pCylinder1 ;
+move -r 1.683813 0 0 ;
+select -r pCylinder1 ;
+duplicate -rr;
+setAttr "pCylinder2.translateX" -1.684;
+setAttr "pCylinder2.rotateX" 180;
+select -r pCylinder2 pCylinder1 ;
+duplicate -rr;
+move -r 0 0 -5.966642 ;
+select -cl  ;
+
+rename "pCylinder1" "Wheel1";
+rename "pCylinder2" "Wheel2";
+rename "pCylinder3" "Wheel3";
+rename "pCylinder4" "Wheel4";
+
+polyCube -w 3.4 -h 1 -d 2 -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1;
+move -r 0 0.207112 -2.843748 ;
+select -r pCube1.f[0] ;
+hilite pCube1.f[0] ;
+selectMode -component ;
+select -r pCube1.f[0] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0 -pvy 0.207112 -pvz -1.843748 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[0];
+move -r 0 0 0.752806 ;
+select -r pCube1.f[0] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0 -pvy 0.207112 -pvz -1.090941575 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[0];
+move -r 0 0 2.250282 ;
+select -r pCube1.f[2] ;
+move -r 0 0 -1.41138 ;
+select -r pCube1.f[2] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0 -pvy 0.207112 -pvz -5.255127814 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[2]; 
+move -r 0 0 -1.832907 ;
+select -r pCube1.f[1] ;
+move -r 0 1.048305 0 ;
+select -r pCube1.f[12] ;
+move -r 0 0.490098 0 ;
+select -r pCube1.e[26] ;
+move -r 0 -0.151065 0 ;
+select -cl  ;
+select -r pCube1.e[2] ;
+performBevelOrChamfer;
+polyBevel3 -fraction 0.5 -offsetAsFraction 1 -autoFit 1 -depth 1 -mitering 0 -miterAlong 0 -chamfer 1 -segments 1 -worldSpace 1 -smoothingAngle 30 -subdivideNgons 1 -mergeVertices 1 -mergeVertexTolerance 0.0001 -miteringAngle 180 -angleTolerance 180 -ch 1 pCube1.e[2];
+setAttr "polyBevel5.segments" 6.9;
+select -r pCube1.f[7] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0 -pvy 1.476313487 -pvz -1.467345026 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[7];
+scale -r -p 0cm 1.476313cm -1.467345cm 0.937831 0.937831 0.937831 ;
+select -r pCube1.f[7] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0 -pvy 1.476313458 -pvz -1.467345026 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[7];
+move -r 0 0 -0.0526645 ;
+select -r pCube1.f[19] ;
+select -tgl pCube1.f[16] ;
+select -add pCube1.f[16:19] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0 -pvy 1.444341049 -pvz -5.624038365 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[16:19];
+scale -r -p 0cm 1.444341cm -5.624038cm 0.92057 0.92057 0.92057 ;
+select -r pCube1.f[16:19] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0 -pvy 1.444341049 -pvz -5.624038365 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[16:19];
+move -r 0 -0.0333549 0 ;
+select -cl  ;
+select -r pCube1.e[17] ;
+select -add pCube1.e[17] ;
+select -tgl pCube1.e[9] ;
+select -add pCube1.e[9] ;
+select -tgl pCube1.e[5] ;
+select -add pCube1.e[5] pCube1.e[47] pCube1.e[50] pCube1.e[52] ;
+select -tgl pCube1.e[44] ;
+select -add pCube1.e[37] pCube1.e[39] pCube1.e[41] pCube1.e[44] ;
+select -tgl pCube1.e[30] ;
+select -add pCube1.e[30] ;
+select -tgl pCube1.e[19] ;
+select -tgl pCube1.e[11] ;
+select -tgl pCube1.e[4] ;
+select -add pCube1.e[4] pCube1.e[45] pCube1.e[48] pCube1.e[51] ;
+select -tgl pCube1.e[40] ;
+select -add pCube1.e[36] pCube1.e[38] pCube1.e[40] pCube1.e[42] ;
+select -tgl pCube1.e[26] ;
+performBevelOrChamfer;
+polyBevel3 -fraction 0.5 -offsetAsFraction 1 -autoFit 1 -depth 1 -mitering 0 -miterAlong 0 -chamfer 1 -segments 1 -worldSpace 1 -smoothingAngle 30 -subdivideNgons 1 -mergeVertices 1 -mergeVertexTolerance 0.0001 -miteringAngle 180 -angleTolerance 180 -ch 1 pCube1.e[4:5] pCube1.e[9] pCube1.e[11] pCube1.e[17] pCube1.e[19] pCube1.e[26] pCube1.e[30] pCube1.e[36:42] pCube1.e[44:45] pCube1.e[47:48] pCube1.e[50:52];
+setAttr "polyBevel7.segments" 2;
+select -r pCube1.f[43] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0 -pvy 0.376628474 -pvz 1.159339997 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[43];
+move -r 0 0 0.0942849 ;
+scale -r -p 0cm 0.376628cm 1.253625cm 0.412647 1 1 ;
+select -cl  ;
+rename "pCube1" "Body";
+
+doGroup 0 1 1;
+select -r null1 ;
+selectKey -clear ; 
+rename "null1" "Geometry";
+select -cl  ;
+
+polyUnite -ch 1 -mergeUVSets 1 -centerPivot -name Body Body Wheel4 Wheel3 Wheel2 Wheel1;
+parent Body1 Geometry ;
+rename "Body1" "CAR";
+
+DeleteHistory;
+CenterPivot;
+
+polyCube -w 25 -h 0.5 -d 25 -sx 3 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1;
+move -r 0 -1.019898 0 ;
+
+select -r pCube1.f[5] ;
+select -tgl pCube1.f[3] ;
+hilite pCube1.f[3] pCube1.f[5] ;
+selectMode -component ;
+select -r pCube1.f[3] pCube1.f[5] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -4.768371582e-007 -pvy -0.7698978107 -pvz 0 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[3] pCube1.f[5];
+move -r 0 0.435499 0 ;
+rename "pCube1" "Ground";
+parent Ground CAR ;
+select -cl  ;
+
+polyUnite -ch 1 -mergeUVSets 1 -centerPivot -name Ground Ground CAR;
+rename "|Ground" "Model";
+parent Model Geometry ;
+DeleteHistory;
+CenterPivot;
+
+select -cl  ;
+
+string $obj[];
+int $radius = 2;
+{
+  
+    $obj = `polyCone -r $radius`;  
+    $obj[0] = `rename  $obj[0] Juan`;
+    move -absolute -worldSpace -6 ($radius*0) 0 $obj[0];
+}
+{
+int $radius = -0.5;
+string $obj[];
+string $objects[];
+
+$obj = `polyCone -radius $radius`;
+move -absolute -relative 6 ($radius*-1.5) 0 $obj[0];
+$radius ++;
+$objects[size($objects)] = $obj [0];
+
+$obj = `polyCone -radius $radius`;
+move -absolute -relative 6 ($radius*-1.5) 0 $obj[0];
+$radius ++;
+$objects[size($objects)] = $obj [0];
+
+$obj = `polyCone -radius $radius`;
+move -absolute -relative 6 ($radius*-1.5) 0 $obj[0];
+$radius ++;
+$objects[size($objects)] = $obj [0];
+
+$obj = `polyCylinder -radius 0.2 -h 0.8`;
+move -absolute -relative 6 ($radius*-1.4) 0 $obj[0];
+$radius ++;
+$objects[size($objects)] = $obj [0];
+
+}
+
+polyUnite pCylinder1 pCone1 pCone2 pCone3;
+
+move -r 0 4.282316 0 ;
+DeleteHistory;
+CenterPivot;
+
+polyUnite polySurface1 Juan Model;
+DeleteHistory;
+CenterPivot;
+
+doGroup 0 1 1;
+select -r group1 ;
+selectKey -clear ;
+rename "group1" "Geo";
+rename "polySurface2" "Model";
+
+select -cl  ;
