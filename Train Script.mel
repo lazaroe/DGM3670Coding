@@ -1,0 +1,61 @@
+int $length = 8;
+int $height = 3;
+int $move = 2;
+int $pwheel = 1;
+string $obj[];
+string $wheel[];
+{
+$obj =`polyCube -w $length -h $height -d 3 -n Wagon`;
+move -absolute -worldSpace -7 ($move) 0 $obj[0];
+
+$wheel = `polyCylinder -r 1 -h 0.5 -sx 20 -sy 1 -sz 0 -n Wheel1`;
+rotate 90 0 90 ;
+move -absolute -worldSpace -9 ($pwheel) 1 $wheel[0];
+
+$wheel = `polyCylinder -r 1 -h 0.5 -sx 20 -sy 1 -sz 0 -n Wheel2`;
+rotate 90 0 90 ;
+move -absolute -worldSpace -5 ($pwheel) 1 $wheel[0];
+
+$wheel = `polyCylinder -r 1 -h 0.5 -sx 20 -sy 1 -sz 0 -n Wheel3`;
+rotate 90 0 90 ;
+move -absolute -worldSpace -9 ($pwheel) -1 $wheel[0];
+
+$wheel = `polyCylinder -r 1 -h 0.5 -sx 20 -sy 1 -sz 0 -n Wheel4`;
+rotate 90 0 90 ;
+move -absolute -worldSpace -5 ($pwheel) -1 $wheel[0];
+}
+polyUnite -n TrainWagon Wagon Wheel1 Wheel2 Wheel3 Wheel4;
+DeleteHistory;
+CenterPivot;
+
+string $Train[];
+string $Tube[];
+string $Front[];
+float $Measurements[] = {0.5, 2, 4.5}; 
+{
+duplicate -ic TrainWagon; move -worldSpace 9 0 0;
+duplicate -ic TrainWagon1; move -worldSpace 18 0 0;
+duplicate -ic TrainWagon2; move -worldSpace 27 0 0;
+
+select -r TrainWagon3.f[4] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 24 -pvy 2 -pvz 0 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 TrainWagon3.f[4];
+scale -r -p 24cm 2cm 0cm 1 0.405501 1 ;
+move -r 0 -0.864365 0 ;
+select -r TrainWagon3.f[4] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 24 -pvy 1.135634631 -pvz 0 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 TrainWagon3.f[4];
+scale -r -p 24cm 1.135635cm 0cm 0.259744 0.259744 0.259744 ;
+move -r 0.806327 -0.714965 0 ;
+select -cl  ;
+
+$Train =`polyCube -w $Measurements[2] -h 3 -d 3 -n Head`;
+move -worldSpace 18 4 0;
+$Tube =`polyCylinder -r $Measurements[0] -h $Measurements[1] -sx 20 -sy 1 -sz 0 -n Smoke`;;
+move -worldSpace 23 4 0;
+}
+polyUnite -n Train TrainWagon TrainWagon1 TrainWagon2 TrainWagon3 Head Smoke;
+DeleteHistory;
+CenterPivot;
+
+doGroup 0 1 0;
+rename "group1" "Geometry";
+
