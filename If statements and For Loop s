@@ -1,0 +1,24 @@
+string $sels[] = `ls - sl`;  //this determines the size of whatever is selected.
+if (size($sels) > 0)     //if the selection is greater than zero then
+{
+    print ("you have " + size($sels) + " objects selected");        //code
+    
+}
+else
+{
+    error ("You didn't select anything");
+}
+
+print (" throught the if statement");
+
+/////////////////////////////////////////////////////////////if statements
+
+//starts with for...for($i = 0; $i < 10; $i++)   ...$i is the iterator which means that is the number that
+will add or subtract to it... the middle is the condition and the amount of times you want it to loop, and the last one is the increment. i++ is the same as i plus 1
+
+
+for($i=0; $i<size($sels); $i++)
+{
+    print ("Index: " + $i +"\n");
+    print ("this object is named" + $sels[$i] + "!\n");
+}

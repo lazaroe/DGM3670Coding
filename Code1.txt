@@ -1,0 +1,16 @@
+//Array is a collection of Data, same data type
+//an array containes this []
+string $names[] = {"Mel", "tODD", "Sweg"}; //The order it goes is [0,1,2]
+int $size = size($names);
+$names [ $size ]
+$names[size($names)] = "Mary"; //first is my array, and teh rest is the size of my arrey checning my index
+print $names
+print ($names[size($names)-1]);
+//string $Names[];
+//$Names = {"Jonny", "Juany"};
+//print $names [1];
+//$names[0] = "Tony";  //To rewrite it
+//print $Names;
+//print $names;
+//stringArrayInsertAtIndex(0, $names, "Toney"); //This adds it to teh beguinning Line
+//print (size ($names));

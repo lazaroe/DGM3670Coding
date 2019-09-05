@@ -1,0 +1,31 @@
+Functions allow you to group and call upon all the time.   function -->Procedure...we use the term proc
+..................................
+proc InsultGenerator(){
+string $insults[] = {"Yo dumb", "Le Fat", "Anthony!", "Lard", "Fag"};
+
+int $size = `size($insults)`;
+float $randNum = `rand $size`;
+int $index = `floor $randNum`;
+
+print ($insults[$index]); //you need to print the name(a string) and the number(and Int)..exmp Print Array ("bILL", 3)
+
+}
+
+InsultGenerator();
+//floor rounds down
+//ceil rounds up
+
+..........................................
+
+proc ComplimentGenerator (string $name, int $age) {
+    string $compliments[] = {"you are so lovely. ", "You're just wonderful. ", "nice eye. "};
+    $age -= 7;
+    
+    int $size = `size($compliments)`;
+    float $randNum = `rand $size`;
+    int $index = `floor $randNum`;
+    
+    print ($name + ", " + $compliments[$index] + "You don't look a day over " + $age + "!");   
+}
+
+ComplimentGenerator("Bill", 40);
