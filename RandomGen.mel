@@ -1,0 +1,47 @@
+proc LandscapeGen (string $type, int $Amount)
+{
+string $Objectselected[] = `ls -sl`;
+string $allObjects;
+int $Min = rand(-20, 0);  
+int $Max = rand(0, 20);
+float $randNum;
+float $randNumz;
+int $SkyLim = rand(10, 20);
+int $SkyMax = rand(20, 30);
+float $SkyNum;
+
+
+if ($type == "Ground")
+{
+for ($i=0; $i< $Amount; $i++)
+{
+   for ($l=0; $l<size($Objectselected); $l++)
+   {
+    duplicate $Objectselected[$l];
+    $randNum = `rand $Min $Max`; 
+    $randNumz = `rand $Min $Max`;
+    move $randNum 0 $randNumz $Objectselected[$l];
+   }
+}
+}
+else if ($type == "Sky")
+{
+for ($i=0; $i< $Amount; $i++)
+{
+   for ($l=0; $l<size($Objectselected); $l++)
+   {
+    duplicate $Objectselected[$l];
+    $randNum = `rand $Min $Max`; 
+    $randNumz = `rand $Min $Max`;
+    $SkyNum = `rand $SkyLim $SkyMax`;
+    move $randNum $SkyNum $randNumz $Objectselected[$l];
+   }
+}
+}
+else
+{
+     error ("Type has to be Sky or Ground");
+}
+}
+
+LandscapeGen("Sky", 2);

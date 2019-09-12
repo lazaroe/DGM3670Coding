@@ -1,0 +1,166 @@
+proc LandscapeGen (string $type, int $Amount)
+{
+    
+int $radius = 1;
+string $obj[] ;
+string $objects[];
+int $Min = rand(-20, 0);  
+int $Max = rand(0, 20);
+float $randNum = `rand $Min $Max`; 
+float $randNumz = `rand $Min $Max`;
+
+//if ( $type == "Ground" )      //How do you make it so that you can only operate this if 
+//{
+$obj = `polySphere -radius $radius`; //How do you turn this into a selected object?
+//move -absolute -worldSpace 0 ($radius*2) 5 $obj[0];
+move $randNum 0 $randNumz;
+$objects[size($objects)] = $obj [0];
+//}
+//else if ( $type == "Sky" )
+//{
+//	print("It's in the sky");  
+//}
+//else
+//{
+//    print("Type either Sky or Ground"};
+//} 
+}
+
+LandscapeGen("Ground", 6);
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+string $selectedList[] = `ls -sl`;
+string $currentObject;
+
+for ($currentObject in $selectedList)
+{
+setAttr ($currentObject + ".translateX") (rand(-10,10));
+setAttr ($currentObject + ".translateY") 0;
+setAttr ($currentObject + ".translateZ") (rand(-10,10));
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+proc LandscapeGen (string $type, int $Amount)
+{
+string $Objectselected[] = `ls -sl`;
+string $allObjects;
+
+if ($type == "Ground")
+{
+for ($allObjects in $Objectselected)
+{
+setAttr ($allObjects + ".translateX") (rand(-20,20));
+setAttr ($allObjects + ".translateY") 0;
+setAttr ($allObjects + ".translateZ") (rand(-20,20));
+}
+}
+else if ($type == "Sky")
+{
+for ($allObjects in $Objectselected)
+{
+setAttr ($allObjects + ".translateX") (rand(-20,20));
+setAttr ($allObjects + ".translateY") (rand(10,20));
+setAttr ($allObjects + ".translateZ") (rand(-20,20));
+}
+}
+else
+{
+     error ("Type has to be Sky or Ground");
+}
+}
+
+LandscapeGen("Ground", 2);
+
+/////////////////////////////////////////////////////////////////////////////////
+
+proc LandscapeGen (string $type, int $Amount)
+{
+string $Objectselected[] = `ls -sl`;
+string $allObjects;
+int $Min = rand(-20, 0);  
+int $Max = rand(0, 20);
+float $randNum;
+float $randNumz;
+
+if ($type == "Ground")
+{
+for ($i=0; $i< $Amount; $i++)
+{
+    string $obj[] = `duplicate $Objectselected[$i]`;
+    $Objectselected[size($Objectselected)] = $obj[0];
+}
+
+for ($i=0; $i<size($Objectselected); $i++)
+{
+$randNum = `rand $Min $Max`; 
+$randNumz = `rand $Min $Max`;
+move $randNum 0 $randNumz $Objectselected[$i];
+
+}
+}
+else if ($type == "Sky")
+{
+for ($allObjects in $Objectselected)
+{
+
+}
+}
+else
+{
+     error ("Type has to be Sky or Ground");
+}
+}
+
+LandscapeGen("Ground", 2);
+
+//////////////////////////////////////////////////////////////
+
+proc LandscapeGen (string $type, int $Amount)
+{
+string $Objectselected[] = `ls -sl`;
+string $allObjects;
+int $Min = rand(-20, 0);  
+int $Max = rand(0, 20);
+float $randNum;
+float $randNumz;
+int $SkyLim = rand(10, 20);
+int $SkyMax = rand(20, 30);
+float $SkyNum;
+
+
+if ($type == "Ground")
+{
+for ($i=0; $i< $Amount; $i++)
+{
+   for ($l=0; $l<size($Objectselected); $l++)
+   {
+    duplicate $Objectselected[$l];
+    $randNum = `rand $Min $Max`; 
+    $randNumz = `rand $Min $Max`;
+    move $randNum 0 $randNumz $Objectselected[$l];
+   }
+}
+}
+else if ($type == "Sky")
+{
+for ($i=0; $i< $Amount; $i++)
+{
+   for ($l=0; $l<size($Objectselected); $l++)
+   {
+    duplicate $Objectselected[$l];
+    $randNum = `rand $Min $Max`; 
+    $randNumz = `rand $Min $Max`;
+    $SkyNum = `rand $SkyLim $SkyMax`;
+    move $randNum $SkyNum $randNumz $Objectselected[$l];
+   }
+}
+}
+else
+{
+     error ("Type has to be Sky or Ground");
+}
+}
+
+LandscapeGen("Sky", 2);
