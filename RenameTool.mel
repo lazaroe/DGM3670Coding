@@ -1,0 +1,27 @@
+proc NameOrganizer (string $type)
+{
+string $selec[] = `ls -sl`;
+string $tokens[];
+string $realtime;
+string $usenumber;
+int $number;
+
+
+for($i=0 ; $i<size($selec) ; $i++)
+   {
+tokenize $type "#" $tokens;
+$number = size($type) - size($tokens[0]) - size($tokens[1]);
+$realtime = "";
+$usenumber = "" + ($i + 1);
+    for($j=0; $j < $number - size($usenumber); $j++)
+           {
+              $realtime += "0";
+           }
+           $realtime += $i + 1;
+$finalName = $tokens[0] + $realtime + $tokens[1];
+rename $selec[$i] ($finalName);
+
+   }
+}
+
+NameOrganizer ("Arm_###_Joint");

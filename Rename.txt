@@ -1,0 +1,111 @@
+proc LandscapeGen (string $type)
+{
+string $selec[] = `ls -sl`;
+
+for($i=0 ; $i<size($selec) ; $i++)
+   {
+//$numTokens = `tokenize name "#" $selec`;
+rename $selec[$i] ($type + ($i+1));
+//string $test = "Hello#my#name#is#Carl";
+//string $tokens[];
+//tokenize $test "#" $tokens;
+//print $tokens;
+   }
+}
+
+LandscapeGen ("Butt");
+
+//////////////////////////////////////
+string $sel[] = `ls -sl`;
+select -cl;
+
+//declare a string variable which will become your new name prefix
+string $newNamePrefix = "Arm" ;
+
+//now run a loop to rename each elemnt in your selection list in the order they were selected
+for($i=0 ; $i<size($sel) ; $i++)
+{
+
+//and rename your objects accordingly
+rename $sel[$i] ($newNamePrefix + ($i+1));
+}
+/////////////////////////////////////
+
+
+proc NameOrganizer (string $type)
+{
+string $selec[] = `ls -sl`;
+int $number;
+for($i=0 ; $i<size($selec) ; $i++)
+   {
+$number = $i + 1;
+string $tokens[];
+tokenize $type "#" $tokens;
+$finalName = $tokens[0] + $number + $tokens[1];
+rename $selec[$i] ($finalName);
+
+print $finalName;
+
+   }
+}
+
+NameOrganizer ("Arm_###Joint");
+
+/////////////////////////////////////////
+
+proc NameOrganizer (string $type)
+    {
+  string $selec[] = `ls -sl`;
+  string $tokens[];
+  string $newNumber;
+  string $currentNumber;
+  int $number;
+
+  
+    for($i=0; $i < size($selec); $i++)
+    {
+      tokenize $type "#" $tokens;
+      $number = (size($type) - (size($tokens[0]) + size($tokens[1])));
+      $newNumber = "";
+      $currentNumber = "" + ($i + 1);
+           for($j=0; $j < $number - size($currentNumber); $j++)
+           {
+              $newNumber += "0";
+           }
+      $newNumber += $i + 1;
+      rename $selec[$i] (($tokens[0])+ $newNumber +($tokens[1]));
+    }
+     
+  }
+NameOrganizer ("Arm_###Joint");
+
+/////////////////////////////////////
+
+
+proc NameOrganizer (string $type)
+{
+string $selec[] = `ls -sl`;
+string $tokens[];
+string $realtime;
+string $usenumber;
+int $number;
+
+
+for($i=0 ; $i<size($selec) ; $i++)
+   {
+tokenize $type "#" $tokens;
+$number = size($type) - size($tokens[0]) - size($tokens[1]);
+$realtime = "";
+$usenumber = "" + ($i + 1);
+    for($j=0; $j < $number - size($usenumber); $j++)
+           {
+              $realtime += "0";
+           }
+           $realtime += $i + 1;
+$finalName = $tokens[0] + $realtime + $tokens[1];
+rename $selec[$i] ($finalName);
+
+   }
+}
+
+NameOrganizer ("Arm_###_Joint");
