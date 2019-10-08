@@ -1,0 +1,206 @@
+proc float Calculatorr (string $type, float $A[])
+{
+if ($type == "Add")
+{
+float $sum = 0;
+for ($i=0; $i < size($A); $i++)
+{
+       $sum += $A[$i]; 
+}
+    return($sum);
+}
+/*
+if ($type == "Subtract")
+{
+$C = $A - $B;
+print $C;
+}
+    
+if ($type == "Divide")
+{
+$C = $A / $B;
+print $C;
+}
+if ($type == "Multiply")
+{
+$C = $A * $B;
+print $C;
+}
+if ($type == "PowerOf")
+{
+  $C = `pow $A $B`; 
+  print $C; 
+//$C =  pow $A $B;
+//print $C;
+}
+if ($type == "Mean")
+{
+int $mean;
+$mean = ($A + $B) /2;
+//print $mean;
+//or
+int $Numbs[] = {1, 2, 3, 4, 5,6,7,8,9,10};
+int $sum = 0; 
+for ($x = 0; $x < 10; $x++) 
+{
+  $sum += $Numbs[$x];
+}
+$MeanValue = $sum / size($Numbs);
+print ($MeanValue + "\n");
+}
+if ($type == "Median")
+{
+int $middleNum = 0; 
+int $allNumb[] = {1,2,3,4,5,6,7,8,9,10}; 
+    $middleNum += $allNumb[size($allNumb) / 2];
+    print ($middleNum + "\n");
+    
+}
+if ($type == "Mode")
+{
+    int $nums[] = `sort{1,1,0,2,2,2,7,7,7,10}`; // this sorts the numbers from decreasimg to increase
+    int $num = $nums[0]; 
+    int $mode = $num; 
+    int $Multiples = 1;
+    int $LargestNum = 1;
+    for ($i = 1; $i < size($nums); $i++)
+    {
+        if ($nums[$i] == $num) //if number you are on is equal the number you are checking
+        {
+            $Multiples++; //adding hte number of times it appears on array.
+        }
+        else //if it doesn't equal that then go to next numb
+        {
+          if ($Multiples > $LargestNum) 
+         {
+          $LargestNum = $Multiples; //if the largest number is the current mode that you're on
+          $mode = $num; //setting the current number you are on
+         }
+         $Multiples = 1; //set the multiples.
+         $num = $nums[$i];
+        }
+    }
+    print ($mode + "\n");
+}
+*/
+}
+
+float $Numbbs[] = {1,2,3};
+Calculatorr ("Add", $Numbbs);
+
+
+////////////////////////////////////
+
+
+{
+proc float Calculatorr (string $type, float $A[])
+{
+if ($type == "Add")
+{
+float $sum = 0;
+for ($i=0; $i < size($A); $i++)
+{
+       $sum += $A[$i]; 
+}
+    return($sum);
+}
+
+if ($type == "Subtract")
+{
+float $Subtract = $A[0];
+for ($i=1; $i < size($A); $i++)
+{
+       $Subtract -= $A[$i]; 
+}
+    return($Subtract);
+}
+  
+if ($type == "Divide")
+{
+float $Divide = $A[0];
+for ($i=1; $i < size($A); $i++)
+{
+       $Divide /= $A[$i]; 
+}
+    return($Divide);
+}
+if ($type == "Multiply")
+{
+float $Multi = 1;
+for ($i=0; $i < size($A); $i++)
+{
+       $Multi *= $A[$i]; 
+}
+return($Multi);
+}
+
+if ($type == "PowerOf")
+{
+  $Power = `pow $A[0] $A[1]`; 
+  return ($Power); 
+//$C =  pow $A $B;
+//print $C;
+}
+if ($type == "Mean")
+{
+int $sum = 0; 
+for ($x = 0; $x < 10; $x++) 
+{
+  $sum += $A[$x];
+}
+$MeanValue = $sum / size($A);
+return $MeanValue;
+}
+
+if ($type == "Median")
+{
+    $A = `sort $A`;
+int $middleNum = 0; 
+    $middleNum += $A[size($A) / 2];
+    return($middleNum);
+    
+    
+}
+ 
+if ($type == "Mode")
+{
+float $nums[] = `sort $A`; // this sorts the numbers from decreasimg to increase
+float $modes[];
+int $maxNum = 0;
+int $currTotal = 0;
+float $currNum = $nums[0];
+		for($i = 0; $i < size($nums); $i++){
+			if($nums[$i] == $currNum){ //if number you are on is equal the number you are checking
+				$currTotal += 1; //adding hte number of times it appears on array.
+			}
+			else{  //if it doesn't equal that then go to next numb
+				if($currTotal > $maxNum){
+					$maxNum = $currTotal; //if the largest number is the current mode that you're on
+					$modes = floatArrayRemove($modes, $modes);
+					$modes[size($modes)] = $currNum; //setting the current number you are on
+				}
+				else if($currTotal == $maxNum){
+					$modes[size($modes)] = $currNum;
+				}
+				$currNum = $nums[$i]; //set the multiples.
+				$currTotal = 1;
+			}
+		}
+		if($currTotal > $maxNum){
+					$maxNum = $currTotal; //if the largest number is the current mode that you're on
+					$modes = floatArrayRemove($modes, $modes);
+					$modes[size($modes)] = $currNum; //setting the current number you are on
+				}
+				else if($currTotal == $maxNum){
+					$modes[size($modes)] = $currNum;
+				}
+		return $modes[0];
+		//Skye Helped me with this script, I wrote down some notes so that I understand it and not just copy it down.
+}
+}
+
+float $Numbbs[] = {1,6,2,1,2,4,4,4,9};
+float $Result;
+$Result = Calculatorr ("Mode", $Numbbs);
+print $Result;
+}
