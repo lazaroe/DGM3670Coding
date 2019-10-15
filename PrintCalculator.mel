@@ -1,0 +1,164 @@
+{
+global proc float Add(float $A[])
+{
+float $sum = 0;
+for ($i=0; $i < size($A); $i++)
+{
+       $sum += $A[$i]; 
+}
+    return($sum);
+}
+
+
+global proc float Subtract(float $A[])
+{
+float $Sub = $A[0];
+for ($i=1; $i < size($A); $i++)
+{
+       $Sub -= $A[$i]; 
+}
+    return($Sub);
+}
+
+global proc float Divide(float $A[])
+{
+float $Divide = $A[0];
+for ($i=1; $i < size($A); $i++)
+{
+       $Divide /= $A[$i]; 
+}
+    return($Divide);
+}
+
+
+global proc float Multiply(float $A[])
+{
+float $Multi = 1;
+for ($i=0; $i < size($A); $i++)
+{
+       $Multi *= $A[$i]; 
+}
+return($Multi);
+}
+
+global proc float PowerOf(float $A[])
+{
+$Power = `pow $A[0] $A[1]`; 
+return ($Power); 
+}
+
+
+global proc float Mean(float $A[])
+{
+int $sum = 0; 
+for ($x = 0; $x < 10; $x++) 
+{
+  $sum += $A[$x];
+}
+$MeanValue = $sum / size($A);
+return $MeanValue;
+}
+
+
+global proc float Median(float $A[])
+{
+    $A = `sort $A`;
+int $middleNum = 0; 
+    $middleNum += $A[size($A) / 2];
+    return($middleNum);
+}
+
+global proc float Mode(float $A[])
+{
+    float $nums[] = `sort $A`; // this sorts the numbers from decreasimg to increase
+float $modes[];
+int $maxNum = 0;
+int $currTotal = 0;
+float $currNum = $nums[0];
+		for($i = 0; $i < size($nums); $i++){
+			if($nums[$i] == $currNum){ //if number you are on is equal the number you are checking
+				$currTotal += 1; //adding hte number of times it appears on array.
+			}
+			else{  //if it doesn't equal that then go to next numb
+				if($currTotal > $maxNum){
+					$maxNum = $currTotal; //if the largest number is the current mode that you're on
+					$modes = floatArrayRemove($modes, $modes);
+					$modes[size($modes)] = $currNum; //setting the current number you are on
+				}
+				else if($currTotal == $maxNum){
+					$modes[size($modes)] = $currNum;
+				}
+				$currNum = $nums[$i]; //set the multiples.
+				$currTotal = 1;
+			}
+		}
+		if($currTotal > $maxNum){
+					$maxNum = $currTotal; //if the largest number is the current mode that you're on
+					$modes = floatArrayRemove($modes, $modes);
+					$modes[size($modes)] = $currNum; //setting the current number you are on
+				}
+				else if($currTotal == $maxNum){
+					$modes[size($modes)] = $currNum;
+				}
+		return $modes[0];
+}
+
+float $SomeNum[] = {3,3,9};
+
+proc float Calculator(string $type, float $Numbbs[])
+{
+   float $result = 0;
+   if ($type == "Addition")
+   {
+   print ($Numbbs[0] + "+" + $Numbbs[1] + "+" + $Numbbs[2] + "=" + Add($Numbbs));
+   $result += Add($Numbbs);
+   return($result);
+   }
+   
+   if ($type == "Subraction")
+   {
+   print ($Numbbs[0] + "-" + $Numbbs[1] + "-" + $Numbbs[2] + "=" + Subtract($Numbbs));
+   $result += Subtract($Numbbs);
+   return($result);
+   }
+   if ($type == "Division")
+   {
+   print ($Numbbs[0] + "/" + $Numbbs[1] + "/" + $Numbbs[2] + "=" + Divide($Numbbs));
+   $result += Divide($Numbbs);
+   return($result);
+   }
+   if ($type == "Multiply")
+   {
+   print ($Numbbs[0] + "*" + $Numbbs[1] + "*" + $Numbbs[2] + "=" + Multiply($Numbbs));
+   $result += Multiply($Numbbs);
+   return($result);
+   }
+   if ($type == "PowerOf")
+   {
+   print ($Numbbs[0] + "^" + $Numbbs[1] + "=" + PowerOf($Numbbs));
+   $result += PowerOf($Numbbs);
+   return($result);
+   }
+   if ($type == "Mean")
+   {
+   print ("The mean of " + $Numbbs[0] + " and " + $Numbbs[1] + " and " + $Numbbs[2] + " is " + Mean($Numbbs));
+   $result += Mean($Numbbs);
+   return($result);
+   }
+   if ($type == "Median")
+   {
+   print ("The Median of " + $Numbbs[0] + " and " + $Numbbs[1] + " and " + $Numbbs[2] + " is " + Median($Numbbs));
+   $result += Median($Numbbs);
+   return($result);
+   }
+   if ($type == "Mode")
+   {
+   print ("The Mode of " + $Numbbs[0] + " and " + $Numbbs[1] + " and " + $Numbbs[2] + " is " + Mode($Numbbs));
+   $result += Mode($Numbbs);
+   return($result);
+   }
+}
+
+Calculator("Mode",$SomeNum);
+
+}
