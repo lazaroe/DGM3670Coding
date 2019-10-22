@@ -1,0 +1,44 @@
+proc CenterObjPiv (string $type)
+{
+string $selection [] = `ls -sl`;
+string $obj;
+float $bb[];
+int $SizeofSelection = `size $selection`;
+float $XDirect;
+float $YDirect;
+float $ZDirect;
+float $BoxLimits[];
+
+
+if ($type == "Group")
+{
+    string $dups[] = `duplicate $selection`;
+    $dups = `polyUnite $dups`;
+    delete -ch $dups;
+
+    $BoxLimits = `xform -q -boundingBox $dups[0]`;
+    print ($bb);
+    delete $dups[0];
+    
+    $XDirect = (($BoxLimits[0]) + ($BoxLimits[3])) /2; //Finds the Midpoint of X
+    $YDirect = (($BoxLimits[1]) + ($BoxLimits[4])) /2; //Finds the Midpoint of y
+    $ZDirect = (($BoxLimits[2]) + ($BoxLimits[5])) /2;//Finds the Midpoint of z
+    spaceLocator -p $XDirect $YDirect $ZDirect -n "Locator" ;
+}
+
+
+if ($type == "single")
+{
+    for ($i=0; $i < size($selection); $i++)
+    {
+     $BoxLimits = `xform -q -ws -boundingBox $selection[$i]`; //Finds the bounding box of the individual object
+     $XDirect = (($BoxLimits[0]) + ($BoxLimits[3])) /2; //Finds the Midpoint of X
+     $YDirect = (($BoxLimits[1]) + ($BoxLimits[4])) /2; //Finds the Midpoint of y
+     $ZDirect = (($BoxLimits[2]) + ($BoxLimits[5])) /2;//Finds the Midpoint of z
+       
+     spaceLocator -p $XDirect $YDirect $ZDirect -n ("Locator" + $i); //Assigns the Location of each avarage to the spacelocator
+        
+    }  
+}
+}
+CenterObjPiv ("Group");

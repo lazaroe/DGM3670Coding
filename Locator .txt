@@ -1,0 +1,243 @@
+getAttr "pSphere1.translateX" ;
+
+setAttr "pSphereShape1.displayEdges" 2;
+
+xform -relative  -translation 1 2 3 "pSphere1"; //moves it into worldSpace //relative moves it relative to the last command
+///spaceLocator
+xform -q -ws -translation "pSphere2"; 
+//find the center of all combined objects
+//find the center of each objet.
+
+string $names[] = {"Bill","Mary","Jonathan"};
+int $numAssignemnts = 10;
+float $grades[size($names)][$numAssignemnts] //array 3x10
+for ($i = 0; $i < $names; $i++)
+{
+	print $names[$i];
+	for ($j=0; $j < $numAssignemnts; $j++)
+{
+	print $numAssignments[$i][$j];
+}
+	
+}
+////////////////
+int $num = 0;
+proc RecursiveAddition(int $limit)
+{
+if ($num < $limit)
+{
+$num++; // This adds 1 everytime limit is bigger than num.
+RecursiveAddition($limit); //this will open the function again unitl num reaches 5.
+}
+}
+
+print $num;
+RecursiveAddition(5);
+
+//////////
+
+proc int Add(int $a, int $b) //you need to specify int if you want to return an int.
+{
+int $total; 
+$total = $a + $b;
+return $total;
+}
+
+Add(4,5);
+
+
+CLASES FOR THE CALCULATOR
+
+/////////////
+
+proc CenterObjPiv (string $type)
+{
+string $selection [] = `ls -sl`;
+string $obj;
+
+//print `getAttr ($obj +".translate")`;
+
+if ($type == "Group")
+{
+
+}
+if ($type == "single")
+{
+    for ($obj in $selection)
+{    
+    getAttr ".translate";
+    
+}
+}
+}
+CenterObjPiv ("single");
+
+//spaceLocator -p 0 0 0;
+
+///////NOTES FOR SCRIPTING/////////////////
+
+
+proc CenterObjPiv (string $type)
+{
+string $selection [] = `ls -sl`;
+string $obj;
+
+//print `getAttr ($obj +".translate")`;
+if ($type == "Group")
+{
+string $object[] = `ls -sl`;
+
+int $arraySize = `size $object`;
+
+vector $e = `xform -q -rp -ws $object[0]`;
+ setAttr($object[1]+ ".translateX") ($e.x); 
+ setAttr($object[1]+ ".translateY") ($e.y); 
+ setAttr($object[1]+ ".translateZ") ($e.z);
+  print "great success!"; 
+ 
+    /*
+    polyUnite $selection;
+    DeleteHistory;
+    CenterPivot;
+    $center = `spaceLocator`;
+    matchTransform $center $selection;
+    SeparatePolygon $selection;
+    
+   for ($obj in $selection) 
+   {
+    xform -cp $obj;
+   }
+   */
+}
+
+
+if ($type == "single")
+{
+    string $EachObj;
+    string $SpaceStuff[];
+    for ($obj in $selection)
+    {
+    $SpaceStuff = `spaceLocator $obj`;
+    }
+    for ($i=0; $i < size($selection); $i++)
+    {
+    string $EachObj = $selection[$i]; 
+    }
+    for ($j=0; $j < size($SpaceStuff); $j++)
+    {
+    $SpaceMax = $SpaceStuff[$j];
+    //setAttr ($SpaceMax + ".translate") $EachObj;
+    }
+{    
+    
+}
+}
+}
+CenterObjPiv ("Group");
+
+/////////////////////////////////////////
+
+proc CenterObjPiv (string $type)
+{
+string $selection [] = `ls -sl`;
+string $obj;
+int $arraySize = `size $selection`;
+
+if ($type == "Group")
+{
+    
+$center = `spaceLocator`;
+
+vector $Center = `xform -q -rp -ws $selection[0]`;
+
+ setAttr($center + ".translateX") ($Center.x); 
+ setAttr($center + ".translateY") ($Center.y); 
+ setAttr($center + ".translateZ") ($Center.z);
+
+ 
+    /*
+    polyUnite $selection;
+    DeleteHistory;
+    CenterPivot;
+    $center = `spaceLocator`;
+    matchTransform $center $selection;
+    SeparatePolygon $selection;
+    
+   for ($obj in $selection) 
+   {
+    xform -cp $obj;
+   }
+   */
+}
+
+
+if ($type == "single")
+{
+    string $EachObj;
+    string $SpaceStuff[];
+    for ($obj in $selection)
+    {
+    $SpaceStuff = `spaceLocator $obj`;
+    }
+    for ($i=0; $i < size($selection); $i++)
+    {
+    string $EachObj = $selection[$i]; 
+    }
+    for ($j=0; $j < size($SpaceStuff); $j++)
+    {
+    $SpaceMax = $SpaceStuff[$j];
+    setAttr ($SpaceMax + ".translate") $EachObj;
+    }
+{    
+    
+}
+}
+}
+CenterObjPiv ("Group");
+
+/////////////////////////////////////
+
+proc CenterObjPiv (string $type)
+{
+string $selection [] = `ls -sl`;
+string $obj;
+float $bb[];
+int $SizeofSelection = `size $selection`;
+float $XDirect;
+float $YDirect;
+float $ZDirect;
+float $BoxLimits[];
+
+
+if ($type == "Group")
+{
+    string $dups[] = `duplicate $selection`;
+    $dups = `polyUnite $dups`;
+    delete -ch $dups;
+
+    $BoxLimits = `xform -q -boundingBox $dups[0]`;
+    print ($bb);
+    delete $dups[0];
+    
+    $XDirect = (($BoxLimits[0]) + ($BoxLimits[3])) /2; //Finds the Midpoint of X
+    $YDirect = (($BoxLimits[1]) + ($BoxLimits[4])) /2; //Finds the Midpoint of y
+    $ZDirect = (($BoxLimits[2]) + ($BoxLimits[5])) /2;//Finds the Midpoint of z
+    spaceLocator -p $XDirect $YDirect $ZDirect -n "Locator" ;
+}
+
+
+if ($type == "single")
+{
+    for ($i=0; $i < size($selection); $i++)
+    {
+     $BoxLimits = `xform -q -ws -boundingBox $selection[$i]`; //Finds the bounding box of the individual object
+     $XDirect = (($BoxLimits[0]) + ($BoxLimits[3])) /2; //Finds the Midpoint of X
+     $YDirect = (($BoxLimits[1]) + ($BoxLimits[4])) /2; //Finds the Midpoint of y
+     $ZDirect = (($BoxLimits[2]) + ($BoxLimits[5])) /2;//Finds the Midpoint of z
+       
+     spaceLocator -p $XDirect $YDirect $ZDirect -n ("Locator" + $i); //Assigns the Location of each avarage to the spacelocator
+        
+    }  
+}
+}
+CenterObjPiv ("Group");
