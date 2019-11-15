@@ -1,0 +1,91 @@
+import maya.cmds as cmds
+sels = cmds.ls(sl=True)
+print sels
+
+numInt = 3
+numFloat = 6.3
+
+print numInt
+print numFloat
+
+students = [['bill','bob','candance','rebeca'],[100,84,88,50],['clayton','ninja','anthony','marty']]
+print students[0][3], students [2][1]
+
+for i in range(len(students[0])):
+    print 'Name:', students [0][i]
+    print 'Score:', students [1][i]
+    print 'Teacher:', students [2][i]
+    print '..................'
+    
+
+for student in students:
+   for s in student:
+       print s, "is great"
+       
+for name in students[0]:
+    print name, "is great"
+    
+    
+    #for i in range(len(students)):
+    #print students[i]
+    #print "done"
+
+
+    #difference between set and a list is that sets are unchangable and they can be unordered. where as listas are the oposite
+    #Disctionaries {ball: definition}
+
+
+Calculator
+
+def Add(values):
+    sum = 0
+    for val in values:
+        sum = sum + val
+        print sum
+Add([3,3,5,4,3])
+
+def Subtract(values):
+    Sub = values[0]
+    for val in range(1,len(values)):
+        Sub -= values[val]
+        print Sub
+Subtract([10,3,2,3])
+
+def Multiply(values):
+    Mul = 1
+    for val in values:
+        Mul = Mul * val
+        print Mul
+Multiply([3,3,5,4,3])
+        
+def Divide(values):
+    Div = values[0]
+    for val in range(1,len(values)):
+        Div /= values[val]
+        print Div
+Divide([10,2])
+
+def Power (values,power):
+    import math
+    return math.pow(values,power)   
+Power(3,3)
+
+def Mean(values):
+    sum = 0
+    for val in values:
+        sum = sum + val
+    mean = sum / len(values) 
+    print mean
+Mean ([4,3,4,5,4,3,4,3,5])
+#The Median and Mode was help from a video on Google.
+
+def Median(values):
+    median = sorted(values)[len(values) / 2]
+    print median
+Median ([1,5,5,5,2,20,1,6,5])
+
+def Mode(values):
+    mode = max(values, key = values.count)
+    print mode
+Mode ([1,5,5,5,2,20,1,6,5])
+    
