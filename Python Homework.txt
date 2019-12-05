@@ -1,0 +1,111 @@
+#Rename Script
+import maya.cmds as cmds
+import tokenize as token
+def RenameTool(nameType,nodeTypee):
+    numberType = str()
+    numberLoop = str()
+    objName = (nameType) + "###" + (nodeTypee)
+    sels = cmds.ls(sl=True)
+    strings = objName.split("#")
+    chars = len(objName) - len(strings[0]) - len(strings[len(strings)-1])
+    print (chars)
+    
+    for i in range(0, len(sels)):
+        numberType = str()
+        numberLoop = str(i + 1)
+        
+        for j in range(chars - len(numberLoop)):
+            numberType += str("0")
+        numberType += str(i + 1)
+        cmds.rename(sels[i], (strings[0] + "_" + numberType + "_" + strings[len(strings)-1]))
+            
+RenameTool("Leg","Jnt")
+
+//////////////////
+#LandscapeGen
+import maya.cmds as cmds
+import random
+def LandscapeGen(type, Amount):
+    from random import randint
+    sels = cmds.ls(sl=True)
+    Min = random.randint(-20, 0)
+    Max = random.randint(0, 20)
+    SkyLim = random.randint(10, 20)
+    SkyMax = random.randint(20, 30)
+    if type == "Ground":
+        for i in range(Amount):
+            for l in range(len(sels)):
+                cmds.duplicate(sels[l])
+                randNum = random.randint(Min, Max)
+                randNumz = random.randint(Min, Max)
+                cmds.move(randNum, 0, randNumz, sels[l])
+                
+    if type == "Sky":
+        for i in range(Amount):
+            for l in range(len(sels)):
+                cmds.duplicate(sels[l])
+                randNum = random.randint(Min, Max)
+                randNumz = random.randint(Min, Max)
+                SkyNum =  random.randint(SkyLim, SkyMax)
+                cmds.move(randNum, SkyNum, randNumz, sels[l])
+                          
+LandscapeGen("Sky",5)
+
+
+
+////////////////////////////////////////
+#CenvetLocator
+def CenterLocator(Type):
+    import maya.cmds as cmds
+    selection = cmds.ls(sl=True)
+    SizeofSelection = len(selection)
+
+    if Type == "Group":
+        dups = cmds.duplicate(selection)
+        dups = cmds.polyUnite(dups)
+        cmds.delete(dups, constructionHistory=True)
+        BoxLimits = cmds.xform(dups[0], query=True , boundingBox=True)
+        cmds.delete(dups[0])
+        XDirect = ((BoxLimits[0]) + (BoxLimits[3])) /2
+        YDirect = ((BoxLimits[1]) + (BoxLimits[4])) /2
+        ZDirect = ((BoxLimits[2]) + (BoxLimits[5])) /2
+        cmds.spaceLocator(position= (XDirect, YDirect, ZDirect), name=("Locator"))
+        
+    if Type == "Single":
+        for i in range(len(selection)):
+            BoxLimits = cmds.xform(selection[i], query=True, worldSpace=True, boundingBox=True)
+            XDirect = ((BoxLimits[0]) + (BoxLimits[3])) /2
+            YDirect = ((BoxLimits[1]) + (BoxLimits[4])) /2
+            ZDirect = ((BoxLimits[2]) + (BoxLimits[5])) /2
+            cmds.spaceLocator(position= (XDirect, YDirect, ZDirect), name=("Locator" + str(i)))
+            
+CenterLocator("Single")
+
+/////////////////
+#ColorNodes
+import maya.cmds as cmds
+def colorControl(colorname):
+    sels = cmds.ls(sl=True)
+    if colorname == 'yellow':
+        color = 17
+    elif colorname == 'blue':
+        color = 6
+    elif colorname == 'Red':
+        color = 13
+    elif colorname == 'Green':
+        color = 26
+    else:
+        color = 5
+        
+    for sel in sels:
+        shapes = cmds.listRelatives(sel, children = True, shapes = True)
+        
+        for shape in shapes:
+            cmds.setAttr('%s.overrideEnabled' % shape, True)
+            cmds.setAttr('%s.overrideColor' % shape, color)
+            
+colorControl('Green')
+
+
+
+
